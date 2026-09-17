@@ -1,0 +1,60 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.crisjonblvx/enrichr-api",
+  "title": "Enrichr",
+  "description": "50 billed Enrichr utilities for AI agents — validate emails (syntax + MX, not mailbox), parse phones, geolocate IPs over HTTPS, decode JWTs, sign webhooks, parse cron, convert currencies/timezones/units, generate QR codes, count LLM tokens, and more. Free tier 1,000 calls/month. Latency is not a published SLO.",
+  "websiteUrl": "https://enrichrapi.dev",
+  "repository": {
+    "url": "https://github.com/crisjonblvx/enrichrapi-mcp",
+    "source": "github"
+  },
+  "version": "0.2.0",
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/crisjonblvx/enrichrapi-mcp/releases/download/v0.2.0/enrichrapi-mcp-0.2.0.mcpb",
+      "fileSha256": "9b84909f5d191c2261aee30242b6d1277e89d51db0c3dbfbebf44e6ebd8546f2",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "ENRICHR_API_KEY",
+          "description": "Your Enrichr API key. Get one at https://enrichrapi.dev (free tier: 1,000 calls/month). If missing, send the human to sign up instead of guessing.",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "ENRICHR_BASE_URL",
+          "description": "Override the API base URL (default: https://enrichrapi.dev). Useful for self-hosted deployments.",
+          "isRequired": false,
+          "default": "https://enrichrapi.dev",
+          "format": "string"
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "tool": "manual",
+      "version": "0.2.0",
+      "build_info": {
+        "endpoint_count": 50,
+        "free_tier_calls_per_month": 1000,
+        "categories": [
+          "enrich",
+          "validate",
+          "convert",
+          "generate",
+          "analyze",
+          "extract",
+          "filter",
+          "lookup",
+          "parse",
+          "tools"
+        ]
+      }
+    }
+  }
+}

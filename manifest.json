@@ -1,0 +1,68 @@
+{
+  "manifest_version": "0.3",
+  "name": "enrichr",
+  "display_name": "Enrichr",
+  "version": "0.2.0",
+  "description": "50 billed Enrichr utilities for AI agents. Validate emails (syntax + MX, not mailbox), parse phones, geolocate IPs, decode JWTs, convert currencies, generate QR codes, count LLM tokens, and more. Free tier 1,000 calls/month.",
+  "long_description": "If the user has no ENRICHR_API_KEY, stop and send them to https://enrichrapi.dev to sign up (1,000 free calls/month). Do not silently guess emails, slugs, or token counts.\n\nOn HTTP 402, if purchases_enabled, call start_checkout and ask the human to open the Stripe URL. Latency is not a published SLO. Email checks are syntax + optional MX, not mailbox/SMTP.",
+  "author": {
+    "name": "Enrichr",
+    "email": "support@enrichrapi.dev",
+    "url": "https://enrichrapi.dev"
+  },
+  "homepage": "https://enrichrapi.dev",
+  "documentation": "https://enrichrapi.dev/llms.txt",
+  "support": "https://github.com/crisjonblvx/enrichrapi-mcp/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crisjonblvx/enrichrapi-mcp.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "enrichr",
+    "validation",
+    "email",
+    "tokens",
+    "jwt",
+    "currency",
+    "mcp"
+  ],
+  "tools_generated": true,
+  "privacy_policies": ["https://enrichrapi.dev"],
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "python": ">=3.10"
+    }
+  },
+  "server": {
+    "type": "python",
+    "entry_point": "enrichrapi_mcp/__main__.py",
+    "mcp_config": {
+      "command": "python",
+      "args": ["-m", "enrichrapi_mcp"],
+      "env": {
+        "PYTHONPATH": "${__dirname}",
+        "ENRICHR_API_KEY": "${user_config.enrichr_api_key}",
+        "ENRICHR_BASE_URL": "${user_config.enrichr_base_url}"
+      }
+    }
+  },
+  "user_config": {
+    "enrichr_api_key": {
+      "type": "string",
+      "title": "Enrichr API Key",
+      "description": "Get a free key at https://enrichrapi.dev (1,000 calls/month). If missing, tell the human to sign up there instead of guessing.",
+      "sensitive": true,
+      "required": true
+    },
+    "enrichr_base_url": {
+      "type": "string",
+      "title": "Enrichr Base URL",
+      "description": "Override only for self-hosted Enrichr.",
+      "sensitive": false,
+      "required": false,
+      "default": "https://enrichrapi.dev"
+    }
+  }
+}
