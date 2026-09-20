@@ -4,7 +4,25 @@
 
 MCP (Model Context Protocol) server for [Enrichr](https://enrichrapi.dev) — exposes Enrichr's **50 billed utilities** to AI coding assistants like Claude Desktop, Cursor, VS Code, and any other MCP client.
 
-> **One key. One install. Validate emails (syntax + MX, not mailbox), parse phones, geolocate IPs over HTTPS, decode JWTs, sign webhooks, parse cron expressions, convert currencies, generate QR codes, count LLM tokens, and the rest of the catalog.**
+> **One install. One key when you are ready. Validate emails (syntax + MX, not mailbox), parse phones, geolocate IPs over HTTPS, decode JWTs, sign webhooks, parse cron expressions, convert currencies, generate QR codes, count LLM tokens, and the rest of the catalog.**
+
+## Fastest path: install first, start free
+
+You do **not** need an Enrichr API key just to launch the MCP server. Start it, browse the live catalog, and use the `signup` tool to create a key when you want billed utilities. The raw key is returned once; verify the email address to unlock the **1,000 free calls/month** allowance and recovery.
+
+```bash
+# recommended: no global install
+uvx enrichrapi-mcp
+```
+
+Then ask your MCP client to:
+
+1. `list_catalog` to see the live tool catalog.
+2. `signup` with your email address if you do not already have a key.
+3. Save the returned `enr_...` key, add it as `ENRICHR_API_KEY`, and restart the server.
+4. Use `account_usage` before bulk work. If the free allowance is exhausted, `account_options` reports whether prepaid checkout is available and `start_checkout` can return the server-controlled Stripe Checkout URL.
+
+No purchase is required to start. Enrichr signup does not create a metered subscription.
 
 ## Install
 
@@ -20,7 +38,7 @@ enrichrapi-mcp
 pip install enrichrapi-mcp
 ```
 
-You'll need an Enrichr API key (free tier is 1,000 calls/month):
+Prefer to create the key outside the MCP client? The public signup endpoint is available directly:
 
 ```bash
 curl -X POST https://enrichrapi.dev/v1/account/signup \
@@ -32,8 +50,7 @@ curl -X POST https://enrichrapi.dev/v1/account/signup \
 
 ### Claude Desktop
 
-Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or
-`%APPDATA%\Claude\claude_desktop_config.json` (Windows):
+You can launch without `ENRICHR_API_KEY` for catalog/signup tools. After signup, add the returned key and restart the MCP server:
 
 ```json
 {
@@ -51,7 +68,7 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) o
 
 ### Cursor / VS Code (Cline)
 
-Same config under `cline.mcpServers` or via the MCP settings UI.
+Use the same command/config under the client's MCP settings UI. `ENRICHR_API_KEY` is optional for launch and required for billed utility calls.
 
 ## Available tools (selected)
 
@@ -60,10 +77,11 @@ The server exposes 30+ MCP tools backed by the public Enrichr REST API. Highligh
 | Tool | What it does |
 |------|--------------|
 | `list_catalog` | Live billed catalog (`outbound_io_only` filter) |
-| `call_enrichr` | Invoke any catalog or account path by name |
+| `signup` | Provision a new Enrichr API key without an existing key |
 | `account_usage` | Remaining free-tier calls + prepaid balance |
 | `account_options` | Whether purchases are live + top-up amount |
 | `start_checkout` | Stripe Checkout URL for the server top-up |
+| `call_enrichr` | Invoke any catalog or account path by name |
 | `enrich_email` | Syntax + optional MX DNS; disposable flags (not mailbox) |
 | `enrich_email_batch` | Up to 100 emails; billed per item; MX deduped |
 | `validate_domain` | Format + DNS A + MX (not mailbox) |
@@ -86,16 +104,15 @@ The server exposes 30+ MCP tools backed by the public Enrichr REST API. Highligh
 | `generate_password` | secrets-module backed, with entropy estimate |
 | `billing_portal` | Open a Stripe Billing Portal session |
 | `rotate_api_key` | Atomically rotate the Enrichr key (old key revoked) |
-| `signup` | Provision a new Enrichr API key |
 
 Full endpoint list: <https://enrichrapi.dev/llms.txt>
 
 ## Pricing
 
-- First **1,000 calls/month free**.
+- First **1,000 calls/month free** after email verification.
 - After that: most endpoints **$0.00001/call** (QR, postal, profanity, address, classify, …); email/phone/IP $0.0001; VAT/IBAN $0.0005; contact cleaner $0.001/row.
+- Prepaid credits are server-controlled; the public site currently offers **$10 prepaid credits** at <https://enrichrapi.dev/billing>.
 - This API will not do mailbox SMTP, USPS/geocode, trained NLP, or unpublished latency SLOs.
-- Pay only for what you use, billed via Stripe.
 - Live catalog: <https://enrichrapi.dev/v1/catalog>
 
 ## Repository
