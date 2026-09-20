@@ -11,9 +11,9 @@ requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "Enrichr", email = "hello@enrichrapi.dev" }]
 keywords = [
-    "mcp", "model-context-protocol", "enrichr", "ai-tools",
-    "agent-tools", "data-enrichment", "validation", "jwt",
-    "webhook", "cron", "currency-conversion",
+    "mcp", "model-context-protocol", "enrichr", "enrichrapi",
+    "enrichrapi-mcp", "ai-tools", "agent-tools", "data-enrichment",
+    "validation", "jwt", "webhook", "cron", "currency-conversion",
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -26,18 +26,25 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "mcp[cli]>=1.0.0",
+    "mcp[cli]>=1.0.0,<2",
     "httpx>=0.27.0",
 ]
 
 [project.urls]
 Homepage = "https://enrichrapi.dev"
 Documentation = "https://enrichrapi.dev/llms.txt"
-Repository = "https://github.com/crisjonblvx/enrichr-api"
-Issues = "https://github.com/crisjonblvx/enrichr-api/issues"
+Repository = "https://github.com/crisjonblvx/enrichrapi-mcp"
+Issues = "https://github.com/crisjonblvx/enrichrapi-mcp/issues"
 
 [project.scripts]
 enrichrapi-mcp = "enrichrapi_mcp:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["enrichrapi_mcp"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/enrichrapi_mcp",
+  "/README.md",
+  "/LICENSE",
+]

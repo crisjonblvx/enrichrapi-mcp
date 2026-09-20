@@ -21,7 +21,7 @@ Setup
    }
 
 Or with uvx after publishing to PyPI:
-   "command": "uvx", "args": ["enrichr-mcp"]
+   "command": "uvx", "args": ["enrichrapi-mcp"]
 """
 from __future__ import annotations
 
@@ -1146,7 +1146,7 @@ async def rotate_api_key() -> dict:
 
 
 def main() -> None:
-    """Entry point for the ``enrichr-mcp`` console script."""
+    """Entry point for the ``enrichrapi-mcp`` console script."""
     mcp.run()
 
 

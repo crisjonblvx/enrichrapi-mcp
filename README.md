@@ -100,7 +100,9 @@ Full endpoint list: <https://enrichrapi.dev/llms.txt>
 
 ## Repository
 
-Source lives at <https://github.com/crisjonblvx/enrichr-api> (subfolder `mcp/`).
+Source: <https://github.com/crisjonblvx/enrichrapi-mcp>
+
+MCP Registry name: `io.github.crisjonblvx/enrichr-api`
 
 ## License
 
