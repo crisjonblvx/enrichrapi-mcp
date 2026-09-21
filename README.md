@@ -4,25 +4,33 @@
 
 MCP (Model Context Protocol) server for [Enrichr](https://enrichrapi.dev) — exposes Enrichr's **50 billed utilities** to AI coding assistants like Claude Desktop, Cursor, VS Code, and any other MCP client.
 
-> **One install. One key when you are ready. Validate emails (syntax + MX, not mailbox), parse phones, geolocate IPs over HTTPS, decode JWTs, sign webhooks, parse cron expressions, convert currencies, generate QR codes, count LLM tokens, and the rest of the catalog.**
+> **One install. Start free. Add prepaid credits only when you need them.** Validate emails (syntax + MX, not mailbox), parse phones, geolocate IPs over HTTPS, decode JWTs, sign webhooks, parse cron expressions, convert currencies, generate QR codes, count LLM tokens, and the rest of the catalog.
 
-## Fastest path: install first, start free
-
-You do **not** need an Enrichr API key just to launch the MCP server. Start it, browse the live catalog, and use the `signup` tool to create a key when you want billed utilities. The raw key is returned once; verify the email address to unlock the **1,000 free calls/month** allowance and recovery.
+## Try Enrichr in 60 seconds
 
 ```bash
-# recommended: no global install
 uvx enrichrapi-mcp
 ```
 
-Then ask your MCP client to:
+You do **not** need an Enrichr API key just to launch the MCP server. In your MCP client, ask Enrichr to:
 
-1. `list_catalog` to see the live tool catalog.
-2. `signup` with your email address if you do not already have a key.
-3. Save the returned `enr_...` key, add it as `ENRICHR_API_KEY`, and restart the server.
-4. Use `account_usage` before bulk work. If the free allowance is exhausted, `account_options` reports whether prepaid checkout is available and `start_checkout` can return the server-controlled Stripe Checkout URL.
+1. `list_catalog` — browse the live utility catalog and prices without a key.
+2. `signup` — create a key when you are ready to make billed utility calls.
+3. Verify the email address tied to that key to unlock **1,000 free calls/month**.
+4. Add the returned `enr_...` key as `ENRICHR_API_KEY` and restart the server.
+5. Use any named tool or `call_enrichr`.
 
-No purchase is required to start. Enrichr signup does not create a metered subscription.
+No card is required to start. Enrichr does not create a metered subscription when you sign up.
+
+### When you outgrow the free tier
+
+Use `account_usage` to see your remaining free calls and prepaid balance. If you need more:
+
+1. Call `account_options` to confirm prepaid checkout is available.
+2. Call `start_checkout` to get Enrichr's server-controlled Stripe Checkout URL.
+3. Add **$10 prepaid credits**. There is no recurring subscription.
+
+You can also manage credits directly at <https://enrichrapi.dev/billing>.
 
 ## Install
 
