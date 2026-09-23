@@ -8,9 +8,13 @@ MCP (Model Context Protocol) server for [Enrichr](https://enrichrapi.dev) — ex
 
 ## Try Enrichr in 60 seconds
 
+PyPI publishing is being finalized. Until the registry package is live, run the public source directly with uv:
+
 ```bash
-uvx enrichrapi-mcp
+uvx --from git+https://github.com/crisjonblvx/enrichrapi-mcp enrichrapi-mcp
 ```
+
+Astral uv supports `uvx --from git+https://...` for running a tool straight from a Git repository, so this path does not depend on the pending PyPI release.
 
 You do **not** need an Enrichr API key just to launch the MCP server. In your MCP client, ask Enrichr to:
 
@@ -34,8 +38,16 @@ You can also manage credits directly at <https://enrichrapi.dev/billing>.
 
 ## Install
 
+### Available now: run from GitHub
+
 ```bash
-# uvx — recommended, no global install needed
+uvx --from git+https://github.com/crisjonblvx/enrichrapi-mcp enrichrapi-mcp
+```
+
+### Registry install: use after the PyPI release is confirmed live
+
+```bash
+# uvx — no global install needed
 uvx enrichrapi-mcp
 
 # or pipx
@@ -58,14 +70,18 @@ curl -X POST https://enrichrapi.dev/v1/account/signup \
 
 ### Claude Desktop
 
-You can launch without `ENRICHR_API_KEY` for catalog/signup tools. After signup, add the returned key and restart the MCP server:
+You can launch without `ENRICHR_API_KEY` for catalog/signup tools. While PyPI publishing is pending, use the GitHub source path. After signup, add the returned key and restart the MCP server:
 
 ```json
 {
   "mcpServers": {
     "enrichr": {
       "command": "uvx",
-      "args": ["enrichrapi-mcp"],
+      "args": [
+        "--from",
+        "git+https://github.com/crisjonblvx/enrichrapi-mcp",
+        "enrichrapi-mcp"
+      ],
       "env": {
         "ENRICHR_API_KEY": "enr_your_api_key"
       }
