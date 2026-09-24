@@ -139,6 +139,10 @@ Full endpoint list: <https://enrichrapi.dev/llms.txt>
 - This API will not do mailbox SMTP, USPS/geocode, trained NLP, or unpublished latency SLOs.
 - Live catalog: <https://enrichrapi.dev/v1/catalog>
 
+## Claude Code ecosystem
+
+Looking for more Claude Code integrations? [Claude Code Marketplace](https://www.claudemarketplace.net/) maintains a directory of MCP servers, skills, marketplaces, and related developer tools.
+
 ## Repository
 
 Source: <https://github.com/crisjonblvx/enrichrapi-mcp>
